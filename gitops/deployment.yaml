@@ -7,43 +7,33 @@ metadata:
     app: node-app
 spec:
   replicas: 2
-
   selector:
     matchLabels:
       app: node-app
-
   template:
     metadata:
       labels:
         app: node-app
-
     spec:
       containers:
       - name: node-app
-
-        image: <AWS_ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com/node-app:v1
-
+        image: techdocker24/login-dashboard:latest
         imagePullPolicy: Always
-
         ports:
         - containerPort: 3000
-
         resources:
           requests:
             cpu: "100m"
             memory: "128Mi"
-
           limits:
             cpu: "500m"
             memory: "512Mi"
-
         livenessProbe:
           httpGet:
             path: /
             port: 3000
           initialDelaySeconds: 30
           periodSeconds: 15
-
         readinessProbe:
           httpGet:
             path: /
